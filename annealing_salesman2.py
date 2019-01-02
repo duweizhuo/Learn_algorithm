@@ -5,6 +5,19 @@ s_old = dist(cities1)
 cit_new = cities1
 s_new = s_old
 
+def judge(dE, t):
+  if(dE < 0):
+    y = 1
+  else:
+    d = np.exp(-(dE / t))
+    if(d > rand):
+      y = 1
+    else:
+      y = 0
+
+   return y
+
+
 while(tmp > tmp_min):
     cit_new = new_solve(cities1)
     s_new = dist(cit_new)
