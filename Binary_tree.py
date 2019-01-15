@@ -1,23 +1,18 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan  3 21:36:49 2019
-
-@author: wdu
-"""
-
-
 class binaryTree(object):
+    
     def __init__(self, value):
         self.value = value
         self.leftBranch = None
         self.rightBranch = None
-        self.parent = None 
+        self.parent = None
+    
     def setLeftBranch(self, node):
         self.leftBranch = node
     def setRightBranch(self, node):
         self.rightBranch = node
     def setParent(self, parent):
         self.parent = parent
+        
     def getValue(self):
         return self.value
     def getLeftBranch(self):
@@ -28,7 +23,7 @@ class binaryTree(object):
         return self.parent
     def __str__(self):
         return self.value
-    
+
 def DFSBinary(root, fcn):
     queue = [root]
     while len(queue) > 0:
@@ -43,11 +38,10 @@ def DFSBinary(root, fcn):
                 queue.insert(0, temp.getLeftBranch())
     return False
 
-
 def BFSBinary(root, fcn):
     queue = [root]
     while len(queue) > 0:
-        print('at node ' + str(queue[0].getValue()))
+        print('at node' + str(queue[0].getValue()))
         if fcn(queue[0]):
             return True
         else:
@@ -56,22 +50,6 @@ def BFSBinary(root, fcn):
                 queue.append(temp.getLeftBranch())
             if temp.getRightBranch():
                 queue.append(temp.getRightBranch())
-    return False
-
-
-def DFSBinaryOrdered(root, fcn, ltFcn):
-    queue = [root]
-    while len(queue) > 0:
-        if fcn(queue[0]):
-            return True
-        elif ltFcn(queue[0]):
-            temp = queue.pop(0)
-            if temp.getLeftBranch():
-                queue.insert(0, temp.getLeftBranch())
-        else:
-            temp = queue.pop(0)
-            if temp.getRightBranch():
-                queue.insert(0, temp.getRightBranch())
     return False
 
 n5 = binaryTree(5)
@@ -93,30 +71,15 @@ n2.setRightBranch(n4)
 n4.setParent(n2)
 n8.setLeftBranch(n6)
 n6.setParent(n8)
-n6.setRightBranch(n7)
-n7.setParent(n6)
 n4.setLeftBranch(n3)
 n3.setParent(n4)
-
+n6.setRightBranch(n7)
+n7.setParent(n6)
 
 def find6(node):
     return node.getValue() == 6
 
-def find10(node):
-    return node.getValue() == 10
-
-def find2(node):
-    return node.getValue() == 2
-
-
-def lt6(node):
-    return node.getValue() > 6
-
-# test examples
-
-print('DFS')
+print("DFS")
 DFSBinary(n5, find6)
-
-print( '')
-print('BFS')
+print("BFS")
 BFSBinary(n5, find6)
