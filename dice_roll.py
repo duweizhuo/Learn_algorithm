@@ -1,28 +1,21 @@
-aa = list(range(1,7))
-def Roll(face_num, dice_num):
-    all = []
-    face_list = list(range(1,face_num+1))
-    if dice_num == 1:
-        return face_list
-    elif dice_num > 1:
-        bb = [x+y for x in aa for y in Roll(face_num, dice_num-1)]
-        return bb
-    
-    
+def Roll(face,num):
+    aa = [x+1 for x in range(face)]
+    if num == 1:
+        return aa
+    if num > 1:
+        return (x+y for x in aa for y in Roll(face,num-1))
 
-def count1(face_num, dice_num):
-    
-    all_Num = Roll(face_num, dice_num)
-    All = {}
-    for i in all_Num:
-        if i in All:
-            All[i] += 1
+def chance(face,num):
+    aa = Roll(face,num)
+    probability = {}
+    for i in aa:
+        if i in probability:
+            probability[i] += 1
         else:
-            All[i] = 1
-#    return All
-
-    all_chance = sum(All.values())
-    for i in All:
-       print("The probability of %d is %f" %(i,All[i]/all_chance))
-      
-print(count1(6,4))
+            probability[i] = 1
+    print(probability)
+    total = sum(probability.values())        
+    for i in probability:
+        print("The probability of %d is %f" % (i,probability[i]/total))
+       
+chance(6,3)
